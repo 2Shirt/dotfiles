@@ -1,0 +1,18 @@
+#!/bin/bash
+
+lockwidth=256
+lockheight=256
+. "$HOME/.cache/wal/colors.sh"
+
+i3lock -i "$HOME/.config/i3/lock.png" \
+  --radius=124 --ring-width=7 \
+  --insidecolor=00000000 --line-uses-inside \
+  --insidevercolor=00000000 --veriftext="" \
+  --insidewrongcolor=00000000 --wrongtext="" \
+  --ringcolor="${color4:1:6}ff" \
+  --separatorcolor="${color4:1:6}ff" \
+  --keyhlcolor="${color0:1:6}ff" \
+  --bshlcolor="${color0:1:6}ff" \
+  --ringvercolor="${color0:1:6}ff" \
+  --ringwrongcolor="${color2:1:6}ff" \
+

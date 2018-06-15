@@ -1,0 +1,51 @@
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+
+URxvt*font:	xft:Inconsolata:size=10,\
+            xft:IPAGothic:size=10
+!URxvt.letterSpace: -3
+
+URxvt.scrollBar:	False
+URxvt.scrollBar_right:	False
+!URxvt.scrollBar_right:	True
+URxvt.scrollstyle:	plain
+
+URxvt.shading:	05
+URxvt.transparent:	true
+
+! Enable copy/past with Ctrl-Shift-C/V
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+!URxvt.perl-ext-common: default,clipboard
+!URxvt.keysym.Shift-Control-C: perl.clipboard.copy
+!URxvt.keysym.Shift-Control-V: perl.clipboard.paste
+
+! Base16 Isotope
+! Scheme: Jan T. Sott
+!! Modified by 2Shirt
+
+*.foreground:   #d0d0d0
+*.background:   #000000
+*.cursorColor:  #d0d0d0
+
+*.color0:       #000000
+*.color1:       #ff0000
+*.color2:       #33ff00
+*.color3:       #ffd000
+*.color4:       #0066ff
+*.color5:       #cc00ff
+*.color6:       #00ffff
+*.color7:       #d0d0d0
+
+*.color8:       #808080
+*.color9:       #ff9900
+*.color10:      #404040
+*.color11:      #606060
+*.color12:      #c0c0c0
+*.color13:      #e0e0e0
+*.color14:      #3300ff
+*.color15:      #ffffff

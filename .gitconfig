@@ -1,0 +1,6 @@
+[user]
+	name = 2Shirt
+	email = 2xShirt@gmail.com
+	signingkey = 152FAC923B0E132C
+[commit]
+	gpgsign = true
