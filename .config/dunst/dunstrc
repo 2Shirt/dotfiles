@@ -318,5 +318,11 @@
 #    appname = Pidgin
 #    summary = *twitter.com*
 #    urgency = normal
+
+[notify_send]
+  appname = notify-send
+  format = ""
+  script = notify-send-wrapper
+
 #
 # vim: ft=cfg

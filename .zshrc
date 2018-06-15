@@ -85,4 +85,7 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 ## Load aliases
-. $HOME/.aliases
+. "$HOME/.aliases"
+
+## Add $HOME/.bin to PATH
+export PATH="$HOME/.bin:$PATH"
