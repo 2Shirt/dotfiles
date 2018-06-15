@@ -11,7 +11,6 @@ URxvt*font:	xft:Inconsolata:size=10,\
 
 URxvt.scrollBar:	False
 URxvt.scrollBar_right:	False
-!URxvt.scrollBar_right:	True
 URxvt.scrollstyle:	plain
 
 URxvt.shading:	05
@@ -23,6 +22,11 @@ URxvt.iso14755_52: false
 !URxvt.perl-ext-common: default,clipboard
 !URxvt.keysym.Shift-Control-C: perl.clipboard.copy
 !URxvt.keysym.Shift-Control-V: perl.clipboard.paste
+
+! Enable clickable links
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
 
 ! Base16 Isotope
 ! Scheme: Jan T. Sott
