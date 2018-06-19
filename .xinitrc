@@ -8,4 +8,5 @@ fi
 # i3 items
 dbus-update-activation-environment --systemd DISPLAY
 xrdb -merge $HOME/.Xresources
+fcitx &
 exec i3
