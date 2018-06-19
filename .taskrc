@@ -34,3 +34,5 @@ taskd.key=~/.task/twoshirt.key.pem
 taskd.ca=~/.task/ca.cert.pem
 taskd.server=farosh.2shirt.work:53589
 include ~/.task/credentials
+report.next.filter=status:pending
+report.next.sort=project-,status-,priority-,due+
