@@ -1,7 +1,10 @@
-source "$XDG_CONFIG_HOME/neomutt/credentials"
-set spoolfile = +INBOX
-#mailboxes = +INBOX
-set imap_check_subscribed
+set mbox_type = Maildir
+set folder = ~/.mail/gmail/
+
+#source "$XDG_CONFIG_HOME/neomutt/credentials"
+set spoolfile = +Inbox
+mailboxes = +Inbox 
+#set imap_check_subscribed
 
 # Store message headers locally to speed things up.
 # If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things up even more.
@@ -13,7 +16,7 @@ set header_cache = "$XDG_CACHE_HOME/neomutt"
 set message_cachedir = "$XDG_CACHE_HOME/neomutt"
 
 # Specify where to save and/or look for postponed messages.
-set postponed = +[Gmail]/Drafts
+#set postponed = +[Gmail]/Drafts
 
 # Allow Mutt to open a new IMAP connection automatically.
 unset imap_passive
@@ -28,8 +31,8 @@ set mailcap_path = "$XDG_CONFIG_HOME/neomutt/mailcap"
 auto_view text/html
 
 set sidebar_visible
-set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
-set mail_check_stats
+#set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+#set mail_check_stats
 
 bind index,pager \CP sidebar-prev
 # Ctrl-Shift-P – Previous Mailbox
