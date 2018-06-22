@@ -1,9 +1,21 @@
 set mbox_type = Maildir
-set folder = ~/.mail/gmail/
+set folder = "$HOME/.mail/gmail/"
 
 #source "$XDG_CONFIG_HOME/neomutt/credentials"
 set spoolfile = +Inbox
-mailboxes = +Inbox 
+mailboxes = +Inbox
+mailboxes = +"Et Cetera"
+mailboxes = +"Et Cetera/Corporate Logos"
+mailboxes = +"Et Cetera/Music"
+mailboxes = +"Et Cetera/Newsletters"
+mailboxes = +"Et Cetera/Work"
+mailboxes = +"Finances"
+mailboxes = +"Finances/Bills"
+mailboxes = +"Finances/Financial Aid"
+mailboxes = +"Finances/Insurance"
+mailboxes = +"Finances/Purchases"
+mailboxes = +"Finances/Taxes"
+mailboxes = +"[Gmail]/Sent Mail"
 #set imap_check_subscribed
 
 # Store message headers locally to speed things up.
