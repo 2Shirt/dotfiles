@@ -19,6 +19,7 @@ mailboxes = "+Finances/Insurance"
 mailboxes = "+Finances/Purchases"
 mailboxes = "+Finances/Taxes"
 mailboxes = "+[Gmail]/Drafts"
+mailboxes = "+[Gmail]/All Mail"
 mailboxes = "+[Gmail]/Sent Mail"
 #set imap_check_subscribed
 
@@ -48,7 +49,8 @@ auto_view text/html
 
 set sidebar_visible
 #set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
-#set mail_check_stats
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
+set mail_check_stats
 
 bind index,pager \CP sidebar-prev
 # Ctrl-Shift-P – Previous Mailbox
