@@ -1,1 +1,1 @@
-text/html; elinks -dump ; copiousoutput;
+text/html; elinks -dump -no-references -no-numbering ; copiousoutput;
