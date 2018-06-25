@@ -50,28 +50,28 @@ Slave :personal-local:etc/work
 
 #Channel personal-finances
 #Master :personal-remote:"Finances"
-#Slave :personal-local:finanaces
+#Slave :personal-local:finances
 #Patterns *
 
 Channel personal-finances-bills
 Master :personal-remote:"Finances/Bills"
-Slave :personal-local:finanaces/bills
+Slave :personal-local:finances/bills
 
 Channel personal-finances-education
 Master :personal-remote:"Finances/Financial Aid"
-Slave :personal-local:finanaces/education
+Slave :personal-local:finances/education
 
 Channel personal-finances-insurance
 Master :personal-remote:"Finances/Insurance"
-Slave :personal-local:finanaces/insurance
+Slave :personal-local:finances/insurance
 
 Channel personal-finances-purchases
 Master :personal-remote:"Finances/Purchases"
-Slave :personal-local:finanaces/purchases
+Slave :personal-local:finances/purchases
 
 Channel personal-finances-taxes
 Master :personal-remote:"Finances/Taxes"
-Slave :personal-local:finanaces/taxes
+Slave :personal-local:finances/taxes
 
 Channel personal-misc-all
 Master :personal-remote:"[Gmail]/All Mail"
