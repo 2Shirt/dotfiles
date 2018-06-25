@@ -1,1 +1,11 @@
 text/html; elinks -dump -no-references -no-numbering ; copiousoutput;
+text/plain; less -S %s
+
+image/jpg; feh-wrapper %s
+image/jpeg; feh-wrapper %s
+image/pjpeg; feh-wrapper %s
+image/png; feh-wrapper %s
+image/gif; feh-wrapper %s
+
+application/pdf; evince %s
+

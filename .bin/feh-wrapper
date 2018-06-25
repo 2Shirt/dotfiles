@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+## feh wrapper for neomutt
+
+if [[ "${1:-}" == "" ]]; then
+  echo "ERROR: no file(s) specified" 1>&2
+  exit 1
+fi
+
+feh --draw-tinted --info 'echo "[%u/%l] %f"' --title "[neomutt-preview]" -FZ. "${@}"
