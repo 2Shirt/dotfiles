@@ -2,7 +2,7 @@
 #
 ## notify-send wrapper for dunst / discurses`
 
-REGEX_HIDE="in (buildapc|MSPs Я Us|The Synthetic Orchestra)#"
+REGEX_HIDE="in '?(buildapc|MSPs Я Us|The Synthetic Orchestra - The Blakers)'?#"
 REGEX_OVERRIDE="(2[Ss]hirt|[Tt]woshirt|[Ww]izard.?[Kk]it)"
 
 summary="${2:-?}"
