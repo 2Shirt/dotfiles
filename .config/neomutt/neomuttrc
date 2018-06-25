@@ -82,4 +82,34 @@ set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 ## Credit: https://github.com/webgefrickel/dotfiles
 # Get addresses from m\u
 set query_command = "mu cfind --format=mutt-ab '%s'"
+#bind editor <tab> complete-query
 
+# some sane vim-like keybindings
+bind index,pager k previous-entry
+bind index,pager j next-entry
+bind index,pager g noop
+bind index,pager R group-reply
+
+bind index gg first-entry
+bind index G last-entry
+bind index <tab> sync-mailbox
+
+bind pager gg top
+bind pager G bottom
+
+# View attachments properly.
+bind attach <return> view-mailcap
+
+bind compose P postpone-message
+bind index p recall-message
+
+# write a new email to the sender of selected email
+bind index,pager @ compose-to-sender
+
+# finding stuff
+bind editor <tab> complete-query
+
+# Sidebar Navigation
+bind index,pager <PageDown> sidebar-next
+bind index,pager <PageUp> sidebar-prev
+bind index,pager <space> sidebar-open
