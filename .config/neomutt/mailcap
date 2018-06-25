@@ -1,3 +1,4 @@
+text/html; elinks %s; nametemplate=%s.html; needsterminal;
 text/html; elinks -dump -no-references -no-numbering ; copiousoutput;
 text/plain; less -S %s
 
