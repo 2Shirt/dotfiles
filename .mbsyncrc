@@ -1,37 +1,24 @@
+## Personal ##
 IMAPAccount personal
-# Address to connect to
 Host imap.gmail.com
 User 2xShirt@gmail.com
-#Pass ***************
-# To store the password in an encrypted file use PassCmd instead of Pass
-# PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
-PassCmd "cat ~/.config/neomutt/creds2"
-#
-# Use SSL
+PassCmd "cat ~/.config/neomutt/creds_isync_personal"
 SSLType IMAPS
-# The following line should work. If get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.
 CertificateFile /etc/ssl/certs/ca-certificates.crt
-#CertificateFile ~/.cert/imap.gmail.com.pem
-#CertificateFile ~/.cert/Equifax_Secure_CA.pem
 
 IMAPStore personal-remote
 Account personal
 
 MaildirStore personal-local
 Subfolders Verbatim
-# The trailing "/" is important
 Path ~/.mail/personal/
-Inbox ~/.mail/personal/inbox
+Inbox ~/.mail/personal
 
 Channel personal-default
 Master :personal-remote:inbox
 Slave :personal-local:
 
-#Channel personal-etc
-#Master :personal-remote:"Et Cetera"
-#Slave :personal-local:etc
-#Patterns *
-
+# ETC
 Channel personal-etc-corp
 Master :personal-remote:"Et Cetera/Corporate Logos"
 Slave :personal-local:etc/corporate-logos
@@ -48,11 +35,7 @@ Channel personal-etc-work
 Master :personal-remote:"Et Cetera/Work"
 Slave :personal-local:etc/work
 
-#Channel personal-finances
-#Master :personal-remote:"Finances"
-#Slave :personal-local:finances
-#Patterns *
-
+# Finances
 Channel personal-finances-bills
 Master :personal-remote:"Finances/Bills"
 Slave :personal-local:finances/bills
@@ -73,6 +56,7 @@ Channel personal-finances-taxes
 Master :personal-remote:"Finances/Taxes"
 Slave :personal-local:finances/taxes
 
+# Misc
 Channel personal-misc-all
 Master :personal-remote:"[Gmail]/All Mail"
 Slave :personal-local:misc/all
@@ -85,24 +69,70 @@ Channel personal-misc-sent
 Master :personal-remote:"[Gmail]/Sent Mail"
 Slave :personal-local:misc/sent
 
-# Group together
+# Group
 Group personal
 Channel personal-default
-#Channel personal-etc
 Channel personal-etc-corp
 Channel personal-etc-music
 Channel personal-etc-news
 Channel personal-etc-work
-#Channel personal-finances
 Channel personal-finances-bills
 Channel personal-finances-education
 Channel personal-finances-insurance
 Channel personal-finances-purchases
 Channel personal-finances-taxes
-#Channel personal-misc
 Channel personal-misc-all
 Channel personal-misc-drafts
 Channel personal-misc-sent
+
+Create Slave
+SyncState *
+
+## Work ##
+IMAPAccount work
+Host imap.gmail.com
+User 2Shirt1201@gmail.com
+PassCmd "cat ~/.config/neomutt/creds_isync_work"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore work-remote
+Account work
+
+MaildirStore work-local
+Subfolders Verbatim
+Path ~/.mail/work/
+Inbox ~/.mail/work
+
+Channel work-default
+Master :work-remote:inbox
+Slave :work-local:
+
+# Waiting
+Channel work-waiting
+Master :work-remote:"Waiting"
+Slave :work-local:waiting
+
+# Misc
+Channel work-misc-all
+Master :work-remote:"[Gmail]/All Mail"
+Slave :work-local:misc/all
+
+Channel work-misc-drafts
+Master :work-remote:"[Gmail]/Drafts"
+Slave :work-local:misc/drafts
+
+Channel work-misc-sent
+Master :work-remote:"[Gmail]/Sent Mail"
+Slave :work-local:misc/sent
+
+# Group
+Group work
+Channel work-default
+Channel work-waiting
+Channel work-misc-all
+Channel work-misc-drafts
+Channel work-misc-sent
 
 Create Slave
 SyncState *

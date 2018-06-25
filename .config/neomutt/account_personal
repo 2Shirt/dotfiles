@@ -1,0 +1,25 @@
+source "$XDG_CONFIG_HOME/neomutt/creds_personal"
+
+#set mbox_type = Maildir
+#set folder = "$HOME/.mail/personal/"
+set spoolfile = "$HOME/.mail/personal/inbox"
+set postponed = "$HOME/.mail/personal/misc/drafts"
+set record = ""
+#mailboxes = "+inbox"
+#mailboxes = "+etc"
+#mailboxes = "+etc/corporate-logos"
+#mailboxes = "+etc/music"
+#mailboxes = "+etc/newsletters"
+#mailboxes = "+etc/work"
+#mailboxes = "+finances"
+#mailboxes = "+finances/bills"
+#mailboxes = "+finances/education"
+#mailboxes = "+finances/insurance"
+#mailboxes = "+finances/purchases"
+#mailboxes = "+finances/taxes"
+#mailboxes = "+misc"
+#mailboxes = "+misc/all"
+#mailboxes = "+misc/drafts"
+#mailboxes = "+misc/sent"
+
+color status cyan default

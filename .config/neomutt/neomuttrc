@@ -1,28 +1,35 @@
-#source "$XDG_CONFIG_HOME/neomutt/credentials"
-source "$XDG_CONFIG_HOME/neomutt/creds_smtp"
+source "$XDG_CONFIG_HOME/neomutt/account_personal"
 
-set mbox_type = Maildir
-set folder = "$HOME/.mail/personal/"
+folder-hook personal/* source "$XDG_CONFIG_HOME/neomutt/account_personal"
+folder-hook work/*     source "$XDG_CONFIG_HOME/neomutt/account_work"
+
+# Personal folders
+set folder = "$HOME/.mail/"
+mailboxes = +personal"
+mailboxes = +personal/etc"
+mailboxes = +personal/etc/corporate-logos"
+mailboxes = +personal/etc/music"
+mailboxes = +personal/etc/newsletters"
+mailboxes = +personal/etc/work"
+mailboxes = +personal/finances"
+mailboxes = +personal/finances/bills"
+mailboxes = +personal/finances/education"
+mailboxes = +personal/finances/insurance"
+mailboxes = +personal/finances/purchases"
+mailboxes = +personal/finances/taxes"
+mailboxes = +personal/misc"
+mailboxes = +personal/misc/all"
+mailboxes = +personal/misc/drafts"
+mailboxes = +personal/misc/sent"
+# Work folders
+mailboxes = +work"
+mailboxes = +work/waiting"
+mailboxes = +work/misc"
+mailboxes = +work/misc/all"
+mailboxes = +work/misc/drafts"
+mailboxes = +work/misc/sent"
+
 set spoolfile = "$HOME/.mail/personal/inbox"
-set postponed = "+misc/drafts"
-set record = ""
-mailboxes = "+inbox"
-mailboxes = "+etc"
-mailboxes = "+etc/corporate-logos"
-mailboxes = "+etc/music"
-mailboxes = "+etc/newsletters"
-mailboxes = "+etc/work"
-mailboxes = "+finances"
-mailboxes = "+finances/bills"
-mailboxes = "+finances/education"
-mailboxes = "+finances/insurance"
-mailboxes = "+finances/purchases"
-mailboxes = "+finances/taxes"
-mailboxes = "+misc"
-mailboxes = "+misc/all"
-mailboxes = "+misc/drafts"
-mailboxes = "+misc/sent"
-#set imap_check_subscribed
 
 # Store message headers locally to speed things up.
 # If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things up even more.
