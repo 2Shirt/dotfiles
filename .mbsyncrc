@@ -1,4 +1,4 @@
-IMAPAccount gmail
+IMAPAccount personal
 # Address to connect to
 Host imap.gmail.com
 User 2xShirt@gmail.com
@@ -14,26 +14,95 @@ CertificateFile /etc/ssl/certs/ca-certificates.crt
 #CertificateFile ~/.cert/imap.gmail.com.pem
 #CertificateFile ~/.cert/Equifax_Secure_CA.pem
 
-IMAPStore gmail-remote
-Account gmail
+IMAPStore personal-remote
+Account personal
 
-MaildirStore gmail-local
+MaildirStore personal-local
 Subfolders Verbatim
 # The trailing "/" is important
-Path ~/.mail/gmail/
-Inbox ~/.mail/gmail/Inbox
+Path ~/.mail/personal/
+Inbox ~/.mail/personal/inbox
 
-Channel gmail
-Master :gmail-remote:
-Slave :gmail-local:
-# Exclude everything under the internal [Gmail] folder, except the interesting folders
-#Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
-Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/All Mail"
-#Patterns * ![Gmail]* "[Gmail]/Sent Mail"
-# Or include everything
+Channel personal-default
+Master :personal-remote:inbox
+Slave :personal-local:
+
+#Channel personal-etc
+#Master :personal-remote:"Et Cetera"
+#Slave :personal-local:etc
 #Patterns *
-# Automatically create missing mailboxes, both locally and on the server
-Create Both
-# Save the synchronization state files in the relevant directory
-SyncState *
 
+Channel personal-etc-corp
+Master :personal-remote:"Et Cetera/Corporate Logos"
+Slave :personal-local:etc/corporate-logos
+
+Channel personal-etc-music
+Master :personal-remote:"Et Cetera/Music"
+Slave :personal-local:etc/music
+
+Channel personal-etc-news
+Master :personal-remote:"Et Cetera/Newsletters"
+Slave :personal-local:etc/newsletters
+
+Channel personal-etc-work
+Master :personal-remote:"Et Cetera/Work"
+Slave :personal-local:etc/work
+
+#Channel personal-finances
+#Master :personal-remote:"Finances"
+#Slave :personal-local:finanaces
+#Patterns *
+
+Channel personal-finances-bills
+Master :personal-remote:"Finances/Bills"
+Slave :personal-local:finanaces/bills
+
+Channel personal-finances-education
+Master :personal-remote:"Finances/Financial Aid"
+Slave :personal-local:finanaces/education
+
+Channel personal-finances-insurance
+Master :personal-remote:"Finances/Insurance"
+Slave :personal-local:finanaces/insurance
+
+Channel personal-finances-purchases
+Master :personal-remote:"Finances/Purchases"
+Slave :personal-local:finanaces/purchases
+
+Channel personal-finances-taxes
+Master :personal-remote:"Finances/Taxes"
+Slave :personal-local:finanaces/taxes
+
+Channel personal-misc-all
+Master :personal-remote:"[Gmail]/All Mail"
+Slave :personal-local:misc/all
+
+Channel personal-misc-drafts
+Master :personal-remote:"[Gmail]/Drafts"
+Slave :personal-local:misc/drafts
+
+Channel personal-misc-sent
+Master :personal-remote:"[Gmail]/Sent Mail"
+Slave :personal-local:misc/sent
+
+# Group together
+Group personal
+Channel personal-default
+#Channel personal-etc
+Channel personal-etc-corp
+Channel personal-etc-music
+Channel personal-etc-news
+Channel personal-etc-work
+#Channel personal-finances
+Channel personal-finances-bills
+Channel personal-finances-education
+Channel personal-finances-insurance
+Channel personal-finances-purchases
+Channel personal-finances-taxes
+#Channel personal-misc
+Channel personal-misc-all
+Channel personal-misc-drafts
+Channel personal-misc-sent
+
+Create Slave
+SyncState *
