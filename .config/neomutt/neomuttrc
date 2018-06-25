@@ -61,13 +61,6 @@ set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
 set mail_check_stats
 set sidebar_width = 20
 
-bind index,pager \CP sidebar-prev
-# Ctrl-Shift-P – Previous Mailbox
-bind index,pager \CN sidebar-next
-# Ctrl-Shift-N – Next Mailbox
-bind index,pager \CO sidebar-open
-# Ctrl-Shift-O – Open Highlighted Mailbox
-
 set sidebar_short_path
 # Shorten mailbox names
 set sidebar_delim_chars="/"
@@ -93,6 +86,7 @@ set fast_reply                       # skip to compose when replying
 set include                          # include message in replies
 set forward_quote                    # include message in forwards
 set text_flowed
+unset wait_key
 
 # Get addresses from mu
 set query_command = "mu cfind --format=mutt-ab '%s'"
@@ -124,6 +118,15 @@ bind index,pager @ compose-to-sender
 bind editor <tab> complete-query
 
 # Sidebar Navigation
-bind index,pager <PageDown> sidebar-next
-bind index,pager <PageUp> sidebar-prev
-bind index,pager <space> sidebar-open
+bind index <PageDown> sidebar-next
+bind index <PageUp> sidebar-prev
+bind index <space> sidebar-open
+bind index,pager . sidebar-next
+bind index,pager , sidebar-prev
+bind index,pager \CO sidebar-open
+
+# Pager Navigation
+bind pager <Up> previous-line
+bind pager <Down> next-line
+
+set pager_stop = yes
