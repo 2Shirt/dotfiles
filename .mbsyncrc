@@ -11,8 +11,8 @@ Account personal
 
 MaildirStore personal-local
 Subfolders Verbatim
-Path ~/.mail/personal/
-Inbox ~/.mail/personal
+Path ~/Mail/personal/
+Inbox ~/Mail/personal
 
 Channel personal-default
 Master :personal-remote:inbox
@@ -101,8 +101,8 @@ Account work
 
 MaildirStore work-local
 Subfolders Verbatim
-Path ~/.mail/work/
-Inbox ~/.mail/work
+Path ~/Mail/work/
+Inbox ~/Mail/work
 
 Channel work-default
 Master :work-remote:inbox

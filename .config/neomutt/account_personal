@@ -1,9 +1,9 @@
 source "$XDG_CONFIG_HOME/neomutt/creds_personal"
 
 #set mbox_type = Maildir
-#set folder = "$HOME/.mail/personal/"
-set spoolfile = "$HOME/.mail/personal/inbox"
-set postponed = "$HOME/.mail/personal/misc/drafts"
+#set folder = "$HOME/Mail/personal/"
+set spoolfile = "$HOME/Mail/personal/inbox"
+set postponed = "$HOME/Mail/personal/misc/drafts"
 set record = ""
 #mailboxes = "+inbox"
 #mailboxes = "+etc"

@@ -4,7 +4,7 @@ folder-hook personal/* source "$XDG_CONFIG_HOME/neomutt/account_personal"
 folder-hook work/*     source "$XDG_CONFIG_HOME/neomutt/account_work"
 
 # Personal folders
-set folder = "$HOME/.mail/"
+set folder = "$HOME/Mail/"
 mailboxes = +personal"
 mailboxes = +personal/etc"
 mailboxes = +personal/etc/corporate-logos"
@@ -29,7 +29,7 @@ mailboxes = +work/misc/all"
 mailboxes = +work/misc/drafts"
 mailboxes = +work/misc/sent"
 
-set spoolfile = "$HOME/.mail/personal/inbox"
+set spoolfile = "$HOME/Mail/personal/inbox"
 
 # Store message headers locally to speed things up.
 # If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things up even more.

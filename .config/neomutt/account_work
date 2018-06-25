@@ -1,9 +1,9 @@
 source "$XDG_CONFIG_HOME/neomutt/creds_work"
 
 #set mbox_type = Maildir
-#set folder = "$HOME/.mail/work/"
-set spoolfile = "$HOME/.mail/work/inbox"
-set postponed = "$HOME/.mail/work/misc/drafts"
+#set folder = "$HOME/Mail/work/"
+set spoolfile = "$HOME/Mail/work/inbox"
+set postponed = "$HOME/Mail/work/misc/drafts"
 set record = ""
 #mailboxes = "+inbox"
 #mailboxes = "+waiting"
