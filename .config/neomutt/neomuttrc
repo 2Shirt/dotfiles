@@ -1,7 +1,7 @@
-set mbox_type = Maildir
 #source "$XDG_CONFIG_HOME/neomutt/credentials"
 source "$XDG_CONFIG_HOME/neomutt/creds_smtp"
 
+set mbox_type = Maildir
 set folder = "$HOME/.mail/personal/"
 set spoolfile = "$HOME/.mail/personal/inbox"
 set postponed = "+misc/drafts"
@@ -52,6 +52,7 @@ set sidebar_visible
 #set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
 set mail_check_stats
+set sidebar_width = 20
 
 bind index,pager \CP sidebar-prev
 # Ctrl-Shift-P – Previous Mailbox
@@ -80,7 +81,13 @@ set sort_re                                # thread based on regex
 set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 
 ## Credit: https://github.com/webgefrickel/dotfiles
-# Get addresses from m\u
+# Misc options
+set fast_reply                       # skip to compose when replying
+set include                          # include message in replies
+set forward_quote                    # include message in forwards
+set text_flowed
+
+# Get addresses from mu
 set query_command = "mu cfind --format=mutt-ab '%s'"
 #bind editor <tab> complete-query
 
