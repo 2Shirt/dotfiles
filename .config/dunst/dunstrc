@@ -322,7 +322,7 @@
 [notify_send]
   appname = notify-send
   format = ""
-  script = notify-send-wrapper
+  script = ~/.bin/notify-send-wrapper
 
 #
 # vim: ft=cfg
