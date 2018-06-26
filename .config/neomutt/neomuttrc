@@ -82,6 +82,7 @@ set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 
 ## Credit: https://github.com/webgefrickel/dotfiles
 # Misc options
+alternative_order text/plain text/enriched text/html
 set fast_reply                       # skip to compose when replying
 set include                          # include message in replies
 set forward_quote                    # include message in forwards
