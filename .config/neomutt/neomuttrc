@@ -1,4 +1,5 @@
 source "$XDG_CONFIG_HOME/neomutt/colors"
+source "gpg -q --for-your-eyes-only --no-tty -d '$XDG_CONFIG_HOME/neomutt/creds.gpg' |"
 source "$XDG_CONFIG_HOME/neomutt/account_personal"
 
 folder-hook personal/* source "$XDG_CONFIG_HOME/neomutt/account_personal"

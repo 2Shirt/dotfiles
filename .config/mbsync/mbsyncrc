@@ -2,7 +2,7 @@
 IMAPAccount personal
 Host imap.gmail.com
 User 2xShirt@gmail.com
-PassCmd "cat ~/.config/neomutt/creds_isync_personal"
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.config/mbsync/creds_personal.gpg 2>/dev/null"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
@@ -92,7 +92,7 @@ SyncState *
 IMAPAccount work
 Host imap.gmail.com
 User 2Shirt1201@gmail.com
-PassCmd "cat ~/.config/neomutt/creds_isync_work"
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.config/mbsync/creds_work.gpg 2>/dev/null"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
