@@ -132,5 +132,7 @@ macro index,pager gw "<change-folder> +work/<Enter>"
 # Pager Navigation
 bind pager <Up> previous-line
 bind pager <Down> next-line
-
 set pager_stop = yes
+
+set hostname = "masked.fqdn"
+
