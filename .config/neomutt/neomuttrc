@@ -125,8 +125,8 @@ bind index <space> sidebar-open
 bind index,pager . sidebar-next
 bind index,pager , sidebar-prev
 bind index,pager \CO sidebar-open
-macro index,pager gp "<change-folder> ~/Mail/personal/<Enter>"
-macro index,pager gw "<change-folder> ~/Mail/work/<Enter>"
+macro index,pager gp "<change-folder> +personal/<Enter>"
+macro index,pager gw "<change-folder> +work/<Enter>"
 
 # Pager Navigation
 bind pager <Up> previous-line
