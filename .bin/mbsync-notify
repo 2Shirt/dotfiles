@@ -3,7 +3,7 @@
 ## Sync email account(s), run mu index, and notify on new email(s)
 
 # Set env
-__config="$XDG_CONFIG_HOME/mbsync/mbsyncrc"
+__config="${HOME}/.config/mbsync/mbsyncrc"
 __max_per_box="3"
 __mail_dir="${HOME}/Mail"
 __notified_list="/tmp/mbsync-notify.notified"
