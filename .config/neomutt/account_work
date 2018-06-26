@@ -1,15 +1,9 @@
 source "$XDG_CONFIG_HOME/neomutt/creds_work"
 
-#set mbox_type = Maildir
-#set folder = "$HOME/Mail/work/"
 set spoolfile = "$HOME/Mail/work/inbox"
 set postponed = "$HOME/Mail/work/misc/drafts"
 set record = ""
-#mailboxes = "+inbox"
-#mailboxes = "+waiting"
-#mailboxes = "+misc"
-#mailboxes = "+misc/all"
-#mailboxes = "+misc/drafts"
-#mailboxes = "+misc/sent"
+set from = "Alan - 1201 <mlk@1201.com>"
+set signature = "$XDG_CONFIG_HOME/neomutt/sig_work"
 
 color status red default
