@@ -1,0 +1,9 @@
+set spoolfile = "$HOME/Mail/work/inbox"
+set postponed = "$HOME/Mail/work/misc/drafts"
+set record = ""
+set from = "Alan - 1201 <mlk@1201.com>"
+set signature = "$XDG_CONFIG_HOME/neomutt/sig_work"
+set smtp_url = "smtps://2Shirt1201@smtp.gmail.com"
+set smtp_pass = "$my_pass_work"
+
+color status red default

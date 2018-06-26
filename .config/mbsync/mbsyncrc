@@ -1,0 +1,138 @@
+## Personal ##
+IMAPAccount personal
+Host imap.gmail.com
+User 2xShirt@gmail.com
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.config/mbsync/creds_personal.gpg 2>/dev/null"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore personal-remote
+Account personal
+
+MaildirStore personal-local
+Subfolders Verbatim
+Path ~/Mail/personal/
+Inbox ~/Mail/personal
+
+Channel personal-default
+Master :personal-remote:inbox
+Slave :personal-local:
+
+# ETC
+Channel personal-etc-corp
+Master :personal-remote:"Et Cetera/Corporate Logos"
+Slave :personal-local:etc/corporate-logos
+
+Channel personal-etc-music
+Master :personal-remote:"Et Cetera/Music"
+Slave :personal-local:etc/music
+
+Channel personal-etc-news
+Master :personal-remote:"Et Cetera/Newsletters"
+Slave :personal-local:etc/newsletters
+
+Channel personal-etc-work
+Master :personal-remote:"Et Cetera/Work"
+Slave :personal-local:etc/work
+
+# Finances
+Channel personal-finances-bills
+Master :personal-remote:"Finances/Bills"
+Slave :personal-local:finances/bills
+
+Channel personal-finances-education
+Master :personal-remote:"Finances/Financial Aid"
+Slave :personal-local:finances/education
+
+Channel personal-finances-insurance
+Master :personal-remote:"Finances/Insurance"
+Slave :personal-local:finances/insurance
+
+Channel personal-finances-purchases
+Master :personal-remote:"Finances/Purchases"
+Slave :personal-local:finances/purchases
+
+Channel personal-finances-taxes
+Master :personal-remote:"Finances/Taxes"
+Slave :personal-local:finances/taxes
+
+# Misc
+Channel personal-misc-all
+Master :personal-remote:"[Gmail]/All Mail"
+Slave :personal-local:misc/all
+
+Channel personal-misc-drafts
+Master :personal-remote:"[Gmail]/Drafts"
+Slave :personal-local:misc/drafts
+
+Channel personal-misc-sent
+Master :personal-remote:"[Gmail]/Sent Mail"
+Slave :personal-local:misc/sent
+
+# Group
+Group personal
+Channel personal-default
+Channel personal-etc-corp
+Channel personal-etc-music
+Channel personal-etc-news
+Channel personal-etc-work
+Channel personal-finances-bills
+Channel personal-finances-education
+Channel personal-finances-insurance
+Channel personal-finances-purchases
+Channel personal-finances-taxes
+Channel personal-misc-all
+Channel personal-misc-drafts
+Channel personal-misc-sent
+
+Create Slave
+SyncState *
+
+## Work ##
+IMAPAccount work
+Host imap.gmail.com
+User 2Shirt1201@gmail.com
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.config/mbsync/creds_work.gpg 2>/dev/null"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore work-remote
+Account work
+
+MaildirStore work-local
+Subfolders Verbatim
+Path ~/Mail/work/
+Inbox ~/Mail/work
+
+Channel work-default
+Master :work-remote:inbox
+Slave :work-local:
+
+# Waiting
+Channel work-waiting
+Master :work-remote:"Waiting"
+Slave :work-local:waiting
+
+# Misc
+Channel work-misc-all
+Master :work-remote:"[Gmail]/All Mail"
+Slave :work-local:misc/all
+
+Channel work-misc-drafts
+Master :work-remote:"[Gmail]/Drafts"
+Slave :work-local:misc/drafts
+
+Channel work-misc-sent
+Master :work-remote:"[Gmail]/Sent Mail"
+Slave :work-local:misc/sent
+
+# Group
+Group work
+Channel work-default
+Channel work-waiting
+Channel work-misc-all
+Channel work-misc-drafts
+Channel work-misc-sent
+
+Create Slave
+SyncState *

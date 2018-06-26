@@ -76,11 +76,11 @@
                "x": 0,
                "y": 0
             },
-            "name": "Mozilla Thunderbird",
+            "name": "neomutt",
             "percent": 0.25,
             "swallows": [
                {
-               "class": "^Thunderbird"
+               "title": "^neomutt"
                }
             ],
             "type": "con"

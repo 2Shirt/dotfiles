@@ -10,7 +10,7 @@ i3-msg "exec owncloud"
 i3-msg "exec urxvt -title 'Discord' -e discurses"
 i3-msg "exec telegram-desktop"
 i3-msg "exec urxvt -title 'weechat' -e weechat"
-i3-msg "exec thunderbird"
+i3-msg "exec urxvt -title 'neomutt' -e neomutt"
 
 i3-msg "workspace 二"
 i3-msg "exec urxvt"

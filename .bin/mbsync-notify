@@ -1,0 +1,53 @@
+#!/bin/bash
+#
+## Sync email account(s), run mu index, and notify on new email(s)
+
+# Set env
+__config="${HOME}/.config/mbsync/mbsyncrc"
+__max_per_box="3"
+__mail_dir="${HOME}/Mail"
+__notified_list="/tmp/mbsync-notify.notified"
+__temp="/tmp/mbsync-notify.new"
+__urgency="NORMAL"
+touch "${__notified_list}"
+echo -n "" > "${__temp}"
+
+# Sync mail
+mbsync --all --config "${__config}" --quiet || exit 1
+
+# Index mail
+mu index --maildir="${__mail_dir}" --quiet || exit 1
+
+# Check for new mail
+for __email in $(
+  find "${__mail_dir}" -type f | \
+  fgrep '/new/' | \
+  grep -Ev '/(all|sent)/'); do
+  if fgrep -q "${__email}" "${__notified_list}"; then
+    # Already notified
+    continue
+  else
+    echo "${__email}" | tee -a "${__notified_list}" >> "${__temp}"
+  fi
+done
+
+# Notify
+IFS=$'\n'
+__regex="s#${HOME}/Mail/([^/]+)/.*#\1#"
+for __box_name in $(sed -r "${__regex}" "${__temp}" | sort | uniq); do
+  __box_count="$(fgrep "${__mail_dir}/${__box_name}/" "${__temp}" | wc -l)"
+
+  if [[ ( "${__box_count}" -gt "${__max_per_box}" ) ]]; then
+    # Show total
+    notify-send --app-name="mbsync-notify" \
+      --urgency="NORMAL" "${__box_count} new ${__box_name} emails"
+  elif [[ ( "${__box_count}" -gt "0" ) ]]; then
+    # Show details for each email
+    while read -r __file; do
+      __sender="$(grep -o '^From: \(.*\)' "${__file}" | tr '<>' '[]')"
+      __subject="$(grep -o '^Subject: \(.*\)' "${__file}")"
+      notify-send --app-name="mbsync-notify" \
+        --urgency="LOW" "New email ${__sender}" "${__subject}"
+    done < "${__temp}"
+  fi
+done

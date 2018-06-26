@@ -1,0 +1,70 @@
+## Credit: http://stevelosh.com/blog/2012/10/the-homely-mutt/
+## Credit: https://github.com/webgefrickel/dotfiles
+
+# Main
+source "gpg -q --for-your-eyes-only --no-tty -d '$XDG_CONFIG_HOME/neomutt/creds.gpg' |"
+source "$XDG_CONFIG_HOME/neomutt/bindings"
+source "$XDG_CONFIG_HOME/neomutt/colors"
+set header_cache = "$XDG_CACHE_HOME/neomutt"
+set hostname = "masked.fqdn"
+set message_cachedir = "$XDG_CACHE_HOME/neomutt"
+
+# Index
+set date_format = "%F %H:%M"
+set index_format = "[%Z]  %D  %-20.20F  %s"
+set sort = threads
+set sort_aux = reverse-last-date-received
+set uncollapse_jump
+set sort_re
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+# Message
+alternative_order text/plain text/enriched text/html
+auto_view text/html
+set mailcap_path = "$XDG_CONFIG_HOME/neomutt/mailcap"
+set pager_stop = yes
+set query_command = "mu cfind --format=mutt-ab '%s'"
+set fast_reply
+set forward_quote
+set include
+set text_flowed
+unset wait_key
+
+# Sidebar
+set mail_check_stats
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
+set sidebar_width = 20
+set sidebar_short_path
+set sidebar_delim_chars="/"
+set sidebar_folder_indent
+set sidebar_indent_string="  "
+
+# Accounts
+source "$XDG_CONFIG_HOME/neomutt/account_personal"
+folder-hook personal/* source "$XDG_CONFIG_HOME/neomutt/account_personal"
+folder-hook work/*     source "$XDG_CONFIG_HOME/neomutt/account_work"
+set folder = "$HOME/Mail/"
+mailboxes = +personal"
+mailboxes = +personal/etc"
+mailboxes = +personal/etc/corporate-logos"
+mailboxes = +personal/etc/music"
+mailboxes = +personal/etc/newsletters"
+mailboxes = +personal/etc/work"
+mailboxes = +personal/finances"
+mailboxes = +personal/finances/bills"
+mailboxes = +personal/finances/education"
+mailboxes = +personal/finances/insurance"
+mailboxes = +personal/finances/purchases"
+mailboxes = +personal/finances/taxes"
+mailboxes = +personal/misc"
+mailboxes = +personal/misc/all"
+mailboxes = +personal/misc/drafts"
+mailboxes = +personal/misc/sent"
+mailboxes = +work"
+mailboxes = +work/waiting"
+mailboxes = +work/misc"
+mailboxes = +work/misc/all"
+mailboxes = +work/misc/drafts"
+mailboxes = +work/misc/sent"
+

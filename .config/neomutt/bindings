@@ -1,0 +1,27 @@
+# General
+bind index,pager g noop
+bind index gg first-entry
+bind index G last-entry
+bind pager <Up> previous-line
+bind pager <Down> next-line
+bind pager gg top
+bind pager G bottom
+
+# Sidebar / Movement
+bind index <PageUp> sidebar-prev
+bind index <PageDown> sidebar-next
+bind index <space> sidebar-open
+bind index <tab> sync-mailbox
+bind index,pager , sidebar-prev
+bind index,pager . sidebar-next
+bind index,pager \CO sidebar-open
+macro index,pager gp "<change-folder> +personal/<Enter>"
+macro index,pager gw "<change-folder> +work/<Enter>"
+
+# Editing
+bind index,pager @ compose-to-sender
+bind index,pager R group-reply
+bind compose P postpone-message
+bind index p recall-message
+bind attach <return> view-mailcap
+bind editor <tab> complete-query
