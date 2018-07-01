@@ -1,0 +1,60 @@
+#!/bin/bash
+#
+## Update TimeWarrior and Toggl at the same time
+
+set -o errexit
+set -o errtrace
+set -o nounset
+set -o pipefail
+
+# Variables
+__mode="${1:-}"
+__regex_date='s/(T?[0-9]{2})([0-9]{2})$/\1:\2/'
+__regex_name='
+  s/anim[ue]/アニメ @楽しい/;
+  s/aruku/歩く @元気/;
+  s/benkyou/勉強 @勉強/;
+  s/hataraku/1201 @働く/;
+  s/kazoku/家族 @人民/;
+  s/keiniku/鶏肉 @食べる/;
+  s/nani/ミスク @ミスク/;
+  s/neru/寝る @寝る/;
+  s/nomu/飲む @食べる/;
+  s/okane/お金 @お金/;
+  s/taberu/食べる @食べる/;
+  s/tanoshii/楽しい @楽しい/;
+  s/tomodachi/友達 @人民/;
+  s/yomu/読む @勉強/'
+__timew_name="$(echo "${2:-}" | sed -r 's/(.)(.*)/\u\1\L\2/')"
+__toggl_name="$(echo "${2:-}" | tr "A-Z" "a-z" | sed -r "${__regex_name}")"
+__toggl_project="${__toggl_name##*@}"
+__toggl_name="${__toggl_name%% *}"
+__start_date="$(echo "${3:-}" | sed -r "${__regex_date}")"
+__end_date="$(echo "${4:-}" | sed -r "${__regex_date}")"
+
+# Check input
+case "${__mode}" in
+  "start")
+    timew start "${__timew_name}" "${__start_date}"
+    toggl start "${__toggl_name}" @"${__toggl_project}" "${__start_date}"
+    ;;
+  "add")
+    if [[ "${__start_date}" == "" ]] || [[ "${__end_date}" == "" ]]; then
+      echo "Please specify a date range for '${__toggl_name}'" 1>&2
+      exit 1
+    fi
+    timew track "${__timew_name}" "${__start_date}" - "${__end_date}"
+    toggl add "${__toggl_name}" @"${__toggl_project}" \
+      "${__start_date}" "${__end_date}"
+    ;;
+
+  *)
+    echo "Usage: $(basename "${0}") [OPTIONS]"
+    echo ""
+    echo "Options:"
+    echo "    start [DATE]"
+    echo "    add NAME DATE DATE"
+    ;;
+
+esac
+
