@@ -8,6 +8,7 @@ source "$XDG_CONFIG_HOME/neomutt/colors"
 set header_cache = "$XDG_CACHE_HOME/neomutt"
 set hostname = "masked.fqdn"
 set message_cachedir = "$XDG_CACHE_HOME/neomutt"
+set quit = ask-no
 
 # Index
 set date_format = "%F %H:%M"
