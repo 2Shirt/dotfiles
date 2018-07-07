@@ -4,7 +4,11 @@ lockwidth=256
 lockheight=256
 . "$HOME/.cache/wal/colors.sh"
 
+# Pause dunst
+killall -SIGUSR1 dunst
+
 i3lock -i "$HOME/.config/i3/lock.png" \
+  --nofork \
   --radius=124 --ring-width=7 \
   --insidecolor=00000000 --line-uses-inside \
   --insidevercolor=00000000 --veriftext="" \
@@ -15,4 +19,7 @@ i3lock -i "$HOME/.config/i3/lock.png" \
   --bshlcolor="${color0:1:6}ff" \
   --ringvercolor="${color0:1:6}ff" \
   --ringwrongcolor="${color2:1:6}ff" \
+
+# Resume dunst
+killall -SIGUSR2 dunst
 
