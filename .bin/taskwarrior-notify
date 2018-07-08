@@ -23,7 +23,7 @@ while IFS= read -r line; do
     notify-send --app-name="TaskWarrior" --urgency="NORMAL" \
       "TaskWarrior" "Active: $line"
   fi
-done <<< $(task status:pending +ACTIVE export | jq -r '.[].description')
+done <<< $(task status:pending +ACTIVE -OVERDUE export | jq -r '.[].description')
 while IFS= read -r line; do
   if [[ ! "${line:-}" == "" ]]; then
     notify-send --app-name="TaskWarrior" --urgency="NORMAL" \
