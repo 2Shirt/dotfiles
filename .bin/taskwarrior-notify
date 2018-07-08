@@ -11,26 +11,34 @@ fi
 
 # Show overdue
 while IFS= read -r line; do
-  notify-send --app-name="TaskWarrior" --urgency="CRITICAL" \
-    "TaskWarrior" "OVERDUE: $line"
+  if [[ ! "${line:-}" == "" ]]; then
+    notify-send --app-name="TaskWarrior" --urgency="CRITICAL" \
+      "TaskWarrior" "OVERDUE: $line"
+  fi
 done <<< $(task status:pending +OVERDUE export | jq -r '.[].description')
 
 # Show active
 while IFS= read -r line; do
-  notify-send --app-name="TaskWarrior" --urgency="NORMAL" \
-    "TaskWarrior" "Active: $line"
+  if [[ ! "${line:-}" == "" ]]; then
+    notify-send --app-name="TaskWarrior" --urgency="NORMAL" \
+      "TaskWarrior" "Active: $line"
+  fi
 done <<< $(task status:pending +ACTIVE export | jq -r '.[].description')
 while IFS= read -r line; do
-  notify-send --app-name="TaskWarrior" --urgency="NORMAL" \
-    "TaskWarrior" "Due today: $line"
+  if [[ ! "${line:-}" == "" ]]; then
+    notify-send --app-name="TaskWarrior" --urgency="NORMAL" \
+      "TaskWarrior" "Due today: $line"
+  fi
 done <<< $(task status:pending due:today -ACTIVE -OVERDUE export | \
   jq -r '.[].description')
 
 # Show due soon
 ## NOTE: due.after:tomorrow means tomorrow 00:00 (or 12AM tomorrow)
 while IFS= read -r line; do
-  notify-send --app-name="TaskWarrior" --urgency="LOW" \
-    "TaskWarrior" "Due soon: $line"
+  if [[ ! "${line:-}" == "" ]]; then
+    notify-send --app-name="TaskWarrior" --urgency="LOW" \
+      "TaskWarrior" "Due soon: $line"
+  fi
 done <<< $(task status:pending due.after:tomorrow due.before:tomorrow+3d \
   -ACTIVE -OVERDUE export | jq -r '.[].description')
 
