@@ -10,13 +10,25 @@
 
 # Use the command 'task show' to see all defaults and overrides
 
-# Files
+# Main
 data.location=~/.task
+taskd.certificate=~/.task/twoshirt.cert.pem
+taskd.key=~/.task/twoshirt.key.pem
+taskd.ca=~/.task/ca.cert.pem
+taskd.server=farosh.2shirt.work:53589
+include ~/.task/credentials
 
-# Color theme (uncomment one to use)
 # Holidays
 include /usr/share/doc/task/rc/holidays.en-US.rc
+calendar.holidays=full
 
+# Next report
+report.next.columns=id,start.age,entry.age,depends,priority,project,tags,scheduled.countdown,due.relative,until.remaining,description,urgency
+report.next.filter=status:pending
+report.next.labels=ID,Active,Age,Deps,P,Project,Tag,S,Due,Until,Description,Urg
+report.next.sort=project-,status-,priority-,due+
+
+# Color theme (uncomment one to use)
 #include /usr/share/doc/task/rc/light-16.theme
 #include /usr/share/doc/task/rc/light-256.theme
 #include /usr/share/doc/task/rc/dark-16.theme
@@ -31,12 +43,3 @@ include /usr/share/doc/task/rc/dark-256.theme
 #include /usr/share/doc/task/rc/solarized-dark-256.theme
 #include /usr/share/doc/task/rc/solarized-light-256.theme
 #include /usr/share/doc/task/rc/no-color.theme
-
-taskd.certificate=~/.task/twoshirt.cert.pem
-taskd.key=~/.task/twoshirt.key.pem
-taskd.ca=~/.task/ca.cert.pem
-taskd.server=farosh.2shirt.work:53589
-include ~/.task/credentials
-report.next.filter=status:pending
-report.next.sort=project-,status-,priority-,due+
-calendar.holidays=full
