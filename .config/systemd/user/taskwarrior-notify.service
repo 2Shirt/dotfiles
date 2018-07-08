@@ -1,0 +1,6 @@
+[Unit]
+Description=TaskWarrior synchronization service
+
+[Service]
+Type=oneshot
+ExecStart=%h/.bin/taskwarrior-notify

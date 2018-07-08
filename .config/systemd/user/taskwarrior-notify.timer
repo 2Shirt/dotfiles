@@ -1,0 +1,10 @@
+[Unit]
+Description=TaskWarrior synchronization timer
+
+[Timer]
+OnBootSec=1m
+OnUnitActiveSec=1h
+Unit=taskwarrior-notify.service
+
+[Install]
+WantedBy=timers.target
