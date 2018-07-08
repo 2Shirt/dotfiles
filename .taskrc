@@ -14,6 +14,9 @@
 data.location=~/.task
 
 # Color theme (uncomment one to use)
+# Holidays
+include /usr/share/doc/task/rc/holidays.en-US.rc
+
 #include /usr/share/doc/task/rc/light-16.theme
 #include /usr/share/doc/task/rc/light-256.theme
 #include /usr/share/doc/task/rc/dark-16.theme
@@ -36,3 +39,4 @@ taskd.server=farosh.2shirt.work:53589
 include ~/.task/credentials
 report.next.filter=status:pending
 report.next.sort=project-,status-,priority-,due+
+calendar.holidays=full
