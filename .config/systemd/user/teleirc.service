@@ -1,0 +1,12 @@
+[Unit]
+Description=Teleirc Telegram to IRC bridge bot
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/teleirc
+Restart=always
+
+[Install]
+WantedBy=default.target
+

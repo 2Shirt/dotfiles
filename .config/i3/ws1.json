@@ -18,7 +18,7 @@
                "y": 0
             },
             "name": "Discord",
-            "percent": 0.25,
+            "percent": 0.33333,
             "swallows": [
                {
                "title": "^Discord$"
@@ -26,27 +26,27 @@
             ],
             "type": "con"
         },
-        {
-            "border": "pixel",
-            "current_border_width": 1,
-            "floating": "auto_off",
-            "geometry": {
-               "height": 742,
-               "width": 1366,
-               "x": 0,
-               "y": 0
-            },
-            "name": "Telegram",
-            "percent": 0.25,
-            "swallows": [
-               {
-               "class": "^TelegramDesktop$",
-               "instance": "^telegram\\-desktop$",
-               "title": "^Telegram"
-               }
-            ],
-            "type": "con"
-        },
+        //{
+            //"border": "pixel",
+            //"current_border_width": 1,
+            //"floating": "auto_off",
+            //"geometry": {
+               //"height": 742,
+               //"width": 1366,
+               //"x": 0,
+               //"y": 0
+            //},
+            //"name": "Telegram",
+            //"percent": 0.33333,
+            //"swallows": [
+               //{
+               //"class": "^TelegramDesktop$",
+               //"instance": "^telegram\\-desktop$",
+               //"title": "^Telegram"
+               //}
+            //],
+            //"type": "con"
+        //},
         {
             "border": "pixel",
             "current_border_width": 1,
@@ -58,7 +58,7 @@
                "y": 0
             },
             "name": "WeeChat",
-            "percent": 0.25,
+            "percent": 0.33333,
             "swallows": [
                {
                "title": "^weechat"
@@ -77,7 +77,7 @@
                "y": 0
             },
             "name": "neomutt",
-            "percent": 0.25,
+            "percent": 0.33333,
             "swallows": [
                {
                "title": "^neomutt"
