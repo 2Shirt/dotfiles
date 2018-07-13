@@ -184,6 +184,8 @@ for_window [class="Galculator"] floating enable border pixel 1
 for_window [title="Screen Layout Editor"] floating enable
 #for_window [title="Slack"] floating enable border normal 5
 for_window [class="virt-manager"] enable border normal 5
+## TeamViewer
+for_window [title="Computers & Contacts"] floating enable border normal 5
 ## KeePass
 for_window [title="Open Database File"] floating enable border normal 5
 for_window [title="Select key file"] floating enable border normal 5
