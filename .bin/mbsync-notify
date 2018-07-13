@@ -3,6 +3,7 @@
 ## Sync email account(s), run mu index, and notify on new email(s)
 
 # Set env
+PATH="/usr/bin:${PATH}"
 __config="${HOME}/.config/mbsync/mbsyncrc"
 __max_per_box="3"
 __mail_dir="${HOME}/Mail"

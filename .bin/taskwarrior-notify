@@ -1,6 +1,8 @@
-#!/bin/env bash
+#!/bin/bash
 #
 ## Sync TaskWarrior and show notifications
+
+PATH="/usr/bin:${PATH}"
 
 # Sync with server
 if ! task synchronize 1>/dev/null 2>&1; then
