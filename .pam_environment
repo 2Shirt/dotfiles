@@ -1,3 +1,15 @@
-GTK_IM_MODULE=fcitx
-QT_IM_MODULE=fcitx
-XMODIFIERS=@im=fcitx
+EDITOR          DEFAULT='vim'
+VISUAL          DEFAULT='vim'
+PAGER           DEFAULT='less'
+
+GTK_IM_MODULE   DEFAULT='fcitx'
+QT_IM_MODULE    DEFAULT='fcitx'
+XMODIFIERS      DEFAULT=@im=fcitx
+
+PATH            DEFAULT="@{HOME}/.bin"
+
+XDG_CACHE_HOME  DEFAULT="@{HOME}/.cache"
+XDG_CONFIG_DIRS DEFAULT="/etc/xdg"
+XDG_CONFIG_HOME DEFAULT="@{HOME}/.config"
+XDG_DATA_DIRS   DEFAULT="/usr/local/share:/usr/share"
+XDG_DATA_HOME   DEFAULT="@{HOME}/.local/share"

@@ -3,4 +3,5 @@
 compton -b --xrender-sync --xrender-sync-fence &
 eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
-
+xrdb -merge $HOME/.Xresources
+fcitx &
