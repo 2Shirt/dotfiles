@@ -70,6 +70,11 @@ case "${__mode}" in
       "${__start_date}" "${__end_date}"
     ;;
   
+  "now")
+    toggl now
+    timew
+    ;;
+  
   "start")
     check_activity
     timew start "${__timew_name}" "${__start_date}"
