@@ -7,38 +7,60 @@ set -o errtrace
 set -o nounset
 set -o pipefail
 
-# Variables
-__mode="${1:-}"
-__regex_date='s/(T?[0-9]{2})([0-9]{2})$/\1:\2/'
-__regex_name='
-  s/anim[ue]/アニメ @楽しい/;
-  s/aruku/歩く @元気/;
-  s/benkyou/勉強 @勉強/;
-  s/hataraku/1201 @働く/;
-  s/kazoku/家族 @人民/;
-  s/keiniku/鶏肉 @食べる/;
-  s/nani/ミスク @ミスク/;
-  s/neru/寝る @寝る/;
-  s/nomu/飲む @食べる/;
-  s/okane/お金 @お金/;
-  s/taberu/食べる @食べる/;
-  s/tanoshii/楽しい @楽しい/;
-  s/tomodachi/友達 @人民/;
-  s/yomu/読む @勉強/'
-__timew_name="$(echo "${2:-}" | sed -r 's/(.)(.*)/\u\1\L\2/')"
-__toggl_name="$(echo "${2:-}" | tr "A-Z" "a-z" | sed -r "${__regex_name}")"
-__toggl_project="${__toggl_name##*@}"
-__toggl_name="${__toggl_name%% *}"
-__start_date="$(echo "${3:-}" | sed -r "${__regex_date}")"
-__end_date="$(echo "${4:-}" | sed -r "${__regex_date}")"
+function check_activity() {
+  # Ensure that all names are set or bail
+  local name_check="${__timew_name:+w}${__toggl_name:+g}${__toggl_project:+p}"
+  if [[ "${name_check}" != "wgp" ]]; then
+    echo "ERROR: Unrecognized activity: '${2:-}'"
+    exit 1
+  fi
+}
 
-# Check input
+# Variables
+__mode="$(echo "${1:-}" | tr "A-Z" "a-z")"
+__regex_date='s/(T?[0-9]{2})([0-9]{2})$/\1:\2/'
+__activities="${HOME}/.bin/time_activities"
+__input_name="$(echo ${2:-} | tr "A-Z" "a-z")"
+__start_date="$(echo "${3:-}" | sed -r "${__regex_date}")"
+if [[ "${__mode}" == "stop" ]]; then
+  __end_date="$(echo "${2:-}" | sed -r "${__regex_date}")"
+else
+  __end_date="$(echo "${4:-}" | sed -r "${__regex_date}")"
+fi
+
+# Set names
+while read -r line; do
+  __friendly_name="${line%% *}"
+  if [[ "${__input_name}" != "${__friendly_name}" ]]; then
+    # Try next line
+    continue
+  fi
+
+  # Set names
+  __timew_name="${line#* }"
+  __timew_name="${__timew_name%% *}"
+  __toggl_name="${line#* }"
+  __toggl_name="${__toggl_name#* }"
+  __toggl_project="${__toggl_name#* }"
+  __toggl_name="${__toggl_name%% *}"
+done <<< "$(sed -r 's/\s+/ /g; /^\s*$/d; /^#.*$/d' "${__activities}")"
+unset __friendly_name
+
+# Tests
+#echo "Raw Input:      ${2:-}"
+#echo "Fixed Input:    ${__input_name:-UNKNOWN}"
+#echo "TimeW Name:     ${__timew_name:-UNKNOWN}"
+#echo "Toggl Name:     ${__toggl_name:-UNKNOWN}"
+#echo "Toggl Project:  ${__toggl_project:-UNKNOWN}"
+#echo ""
+#echo "Start Date:     ${__start_date:-UNKNOWN}"
+#echo "End Date:       ${__end_date:-UNKNOWN}"
+#echo ""
+
+# Check run mode
 case "${__mode}" in
-  "start")
-    timew start "${__timew_name}" "${__start_date}"
-    toggl start "${__toggl_name}" @"${__toggl_project}" "${__start_date}"
-    ;;
   "add")
+    check_activity
     if [[ "${__start_date}" == "" ]] || [[ "${__end_date}" == "" ]]; then
       echo "Please specify a date range for '${__toggl_name}'" 1>&2
       exit 1
@@ -47,13 +69,29 @@ case "${__mode}" in
     toggl add "${__toggl_name}" @"${__toggl_project}" \
       "${__start_date}" "${__end_date}"
     ;;
+  
+  "start")
+    check_activity
+    timew start "${__timew_name}" "${__start_date}"
+    toggl start "${__toggl_name}" @"${__toggl_project}" "${__start_date}"
+    ;;
+  
+  "stop")
+    timew stop "${__end_date}"
+    toggl stop "${__end_date}"
+    ;;
 
   *)
+    if [[ "${__mode}" != "" ]]; then
+      echo "ERROR: Unrecognized mode '${__mode}'"
+      echo ""
+    fi
     echo "Usage: $(basename "${0}") [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "    start [DATE]"
-    echo "    add NAME DATE DATE"
+    echo "    add   NAME DATE DATE"
+    echo "    start NAME [DATE]"
+    echo "    stop       [DATE]"
     ;;
 
 esac
