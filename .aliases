@@ -10,6 +10,10 @@ alias dotfiles='git --git-dir="$HOME/Projects/dotfiles.git" --work-tree="$HOME"'
 alias du='du -sch --apparent-size'
 alias feh='feh --draw-tinted --info "echo \"[%u/%l] %f\"" -Z -.'
 alias fix-perms='find -type d -exec chmod 755 "{}" \; && find -type f -exec chmod 644 "{}" \;'
+alias glog='git log --oneline --decorate --graph'
+alias gloga='git log --oneline --decorate --graph --all'
+alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+alias glola="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all"
 alias less='less -S'
 alias ls='ls --color=auto'
 alias mkdir='mkdir -p'
@@ -30,5 +34,6 @@ alias srs='sudo rsync -avhPS --stats --exclude-from="$HOME/.rsync_exclusions"'
 alias srsz='sudo rsync -avhzPS --stats --exclude-from="$HOME/.rsync_exclusions"'
 alias t='task'
 alias tt='time-tracking'
-alias tw='timew'
 alias tunnel-start='tmux new-session -s tunnel $HOME/.tunnel'
+alias tw='timew'
+
