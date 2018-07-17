@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/teleirc
+ExecStart=/usr/bin/node /usr/bin/teleirc
 Restart=always
 
 [Install]
