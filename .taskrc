@@ -24,9 +24,11 @@ calendar.holidays=full
 
 # Next report
 report.next.columns=id,start.age,entry.age,depends,priority,project,tags,scheduled.countdown,due.relative,until.remaining,description,urgency
-report.next.filter=status:pending -SCHEDULED
+report.next.filter=status:pending
+#report.next.filter=status:pending -SCHEDULED
 report.next.labels=ID,Active,Age,Deps,P,Project,Tag,S,Due,Until,Description,Urg
-report.next.sort=project-,status-,priority-,due+
+report.next.sort=urgency-,project-,status-,due+
+#report.next.sort=project-,status-,priority-,due+
 
 # Color theme (uncomment one to use)
 #include /usr/share/doc/task/rc/light-16.theme
