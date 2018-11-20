@@ -10,10 +10,6 @@ alias dotfiles='git --git-dir="$HOME/Projects/dotfiles.git" --work-tree="$HOME"'
 alias du='du -sch --apparent-size'
 alias feh='feh --draw-tinted --info "echo \"[%u/%l] %f\"" -Z -.'
 alias fix-perms='find -type d -exec chmod 755 "{}" \; && find -type f -exec chmod 644 "{}" \;'
-alias glog='git log --oneline --decorate --graph'
-alias gloga='git log --oneline --decorate --graph --all'
-alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
-alias glola="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all"
 alias hexedit='hexedit --color'
 alias less='less -S'
 alias ls='ls --color=auto'
