@@ -25,8 +25,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym Control+Shift+Escape exec "firefox"
 
 # alt+tab navi
-bindsym Mod1+Tab workspace next
-bindsym Mod1+Shift+Tab workspace prev
+#bindsym Mod1+Tab workspace next
+#bindsym Mod1+Shift+Tab workspace prev
 
 # change borders
 bindsym $mod+u border none
@@ -58,7 +58,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 bindsym $mod+q kill
-bindsym Mod1+F4 kill
+#bindsym Mod1+F4 kill
 
 # start dmenu (a program launcher)
 bindsym $mod+Shift+d exec dmenu_run
@@ -185,10 +185,13 @@ for_window [title="Screen Layout Editor"] floating enable
 #for_window [title="Slack"] floating enable border normal 5
 for_window [class="virt-manager"] enable border normal 5
 ## TeamViewer
-for_window [title="Computers & Contacts"] floating enable border normal 5
+#for_window [class="TeamViewer"] floating enable border pixel 1
+#for_window [title="Computers & Contacts"] floating enable border normal 5
 ## KeePass
 for_window [title="Open Database File"] floating enable border normal 5
 for_window [title="Select key file"] floating enable border normal 5
+for_window [title="Attach Files To"] floating enable border normal 5
+for_window [title="Save Attached File As"] floating enable border normal 5
 for_window [title="^Font$"] floating enable border normal 5
 
 # switch to workspace with urgent window automatically
@@ -305,6 +308,7 @@ bar {
         separator_symbol    " "
         status_command      i3status
         height              26
+        tray_output         primary
 }
 
 exec --no-startup-id /home/twoshirt/.config/i3/startup

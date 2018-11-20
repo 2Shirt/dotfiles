@@ -13,6 +13,7 @@ i3lock -i "$HOME/.config/i3/lock.png" \
   --insidecolor=00000000 --line-uses-inside \
   --insidevercolor=00000000 --veriftext="" \
   --insidewrongcolor=00000000 --wrongtext="" \
+  --noinputtext="" \
   --ringcolor="${color4:1:6}ff" \
   --separatorcolor="${color4:1:6}ff" \
   --keyhlcolor="${color0:1:6}ff" \
