@@ -1,103 +1,142 @@
-#!/bin/bash
+#!/bin/env python
 #
-## Update TimeWarrior and Toggl at the same time
+## Time Tracking tool
 
-set -o errexit
-set -o errtrace
-set -o nounset
-set -o pipefail
+import datetime
+import os
+import re
+import subprocess
+import sys
+import time
 
-function check_activity() {
-  # Ensure that all names are set or bail
-  local name_check="${__timew_name:+w}${__toggl_name:+g}${__toggl_project:+p}"
-  if [[ "${name_check}" != "wgp" ]]; then
-    echo "ERROR: Unrecognized activity: '${2:-}'"
-    exit 1
-  fi
-}
+ACTIVITIES = {
+  'ドム':     {'Desc': '飲む',    'Group': '独学',    'TimeWarrior': 'Dokugaku'},
+  '分類':     {'Desc': '分類',    'Group': '独学',    'TimeWarrior': 'Dokugaku'},
+  '喫茶店':   {'Desc': '喫茶店',  'Group': '独学',    'TimeWarrior': 'Dokugaku'},
+  '日本語':   {'Desc': '日本語',  'Group': '独学',    'TimeWarrior': 'Dokugaku'},
+  '独学':     {'Desc': '何',      'Group': '独学',    'TimeWarrior': 'Dokugaku'},
+  '研究':     {'Desc': '研究',    'Group': '独学',    'TimeWarrior': 'Dokugaku'},
+  '読む':     {'Desc': '読む',    'Group': '独学',    'TimeWarrior': 'Dokugaku'},
+  '元気':     {'Desc': '何',      'Group': '元気',    'TimeWarrior': 'Genki'},
+  '料理':     {'Desc': '料理',    'Group': '元気',    'TimeWarrior': 'Genki'},
+  '歩く':     {'Desc': '歩く',    'Group': '元気',    'TimeWarrior': 'Genki'},
+  '準備':     {'Desc': '準備',    'Group': '元気',    'TimeWarrior': 'Genki'},
+  '散髪':     {'Desc': '散髪',    'Group': '元気',    'TimeWarrior': 'Genki'},
+  '十二':     {'Desc': '十二',    'Group': '働く',    'TimeWarrior': 'Hataraku'},
+  'Schmidt':  {'Desc': 'Schmidt', 'Group': '働く',    'TimeWarrior': 'Hataraku'},
+  'Zac':      {'Desc': 'Zac',     'Group': '働く',    'TimeWarrior': 'Hataraku'},
+  '働く':     {'Desc': '何',      'Group': '働く',    'TimeWarrior': 'Hataraku'},
+  '人民':     {'Desc': '何',      'Group': '人民',    'TimeWarrior': 'Jinmin'},
+  '友達':     {'Desc': '友達',    'Group': '人民',    'TimeWarrior': 'Jinmin'},
+  '家族':     {'Desc': '家族',    'Group': '人民',    'TimeWarrior': 'Jinmin'},
+  '何':       {'Desc': '何',      'Group': 'ミスク',  'TimeWarrior': 'Nani'},
+  '料理屋':   {'Desc': '料理屋',  'Group': 'ミスク',  'TimeWarrior': 'Nani'},
+  '寝る':     {'Desc': '寝る',    'Group': '寝る',    'TimeWarrior': 'Neru'},
+  '飲む':     {'Desc': '飲む',    'Group': '楽しい',  'TimeWarrior': 'Nomu'},
+  '飲み屋':   {'Desc': '飲み屋',  'Group': '楽しい',  'TimeWarrior': 'Nomu'},
+  '旅行':     {'Desc': '何',      'Group': '旅行',    'TimeWarrior': 'Ryokou'},
+  '運転':     {'Desc': '運転',    'Group': '旅行',    'TimeWarrior': 'Ryokou'},
+  'お金':     {'Desc': 'お金',    'Group': '成人',    'TimeWarrior': 'Seijin'},
+  '銀行':     {'Desc': '銀行',    'Group': '成人',    'TimeWarrior': 'Seijin'},
+  '成人':     {'Desc': '何',      'Group': '成人',    'TimeWarrior': 'Seijin'},
+  '掃除':     {'Desc': '掃除',    'Group': '成人',    'TimeWarrior': 'Seijin'},
+  '洗濯':     {'Desc': '洗濯',    'Group': '成人',    'TimeWarrior': 'Seijin'},
+  '買い物':   {'Desc': '買い物',  'Group': '成人',    'TimeWarrior': 'Seijin'},
+  '食べる':   {'Desc': '何',      'Group': '食べる',  'TimeWarrior': 'Taberu'},
+  '寿司':     {'Desc': '寿司',    'Group': '食べる',  'TimeWarrior': 'Taberu'},
+  '鶏肉':     {'Desc': '鶏肉',    'Group': '食べる',  'TimeWarrior': 'Taberu'},
+  'アニメ':   {'Desc': 'アニメ',  'Group': '楽しい',  'TimeWarrior': 'Tanoshii'},
+  'ゲーム':   {'Desc': 'ゲーム',  'Group': '楽しい',  'TimeWarrior': 'Tanoshii'},
+  '楽しい':   {'Desc': '何',      'Group': '楽しい',  'TimeWarrior': 'Tanoshii'},
+  '映画':     {'Desc': '映画',    'Group': '楽しい',  'TimeWarrior': 'Tanoshii'},
+  }
 
-# Variables
-__mode="$(echo "${1:-}" | tr "A-Z" "a-z")"
-__regex_date='s/(T?[0-9]{2})([0-9]{2})$/\1:\2/'
-__activities="${HOME}/.bin/time_activities"
-__input_name="$(echo ${2:-} | tr "A-Z" "a-z")"
-__start_date="$(echo "${3:-}" | sed -r "${__regex_date}")"
-if [[ "${__mode}" == "stop" ]]; then
-  __end_date="$(echo "${2:-}" | sed -r "${__regex_date}")"
-else
-  __end_date="$(echo "${4:-}" | sed -r "${__regex_date}")"
-fi
+def add_activity(time_start, time_end, activity):
+  """Add activity to both Toggl and TimeWarrior."""
+  act = ACTIVITIES.get(activity, {})
+  if act:
+    print('Adding: {Desc} @{Group}'.format(**act))
+  else:
+    print('WARNING: Activity "{}" not recognized'.format(activity))
+    return
 
-# Set names
-while read -r line; do
-  __friendly_name="${line%% *}"
-  if [[ "${__input_name}" != "${__friendly_name}" ]]; then
-    # Try next line
-    continue
-  fi
+  # TimeWarrior
+  cmd = [
+    'timew', 'track', act['TimeWarrior'],
+    time_start, '-', time_end]
+  run_cmd(cmd)
 
-  # Set names
-  __timew_name="${line#* }"
-  __timew_name="${__timew_name%% *}"
-  __toggl_name="${line#* }"
-  __toggl_name="${__toggl_name#* }"
-  __toggl_project="${__toggl_name#* }"
-  __toggl_name="${__toggl_name%% *}"
-done <<< "$(sed -r 's/\s+/ /g; /^\s*$/d; /^#.*$/d' "${__activities}")"
-unset __friendly_name
+  # Toggl
+  cmd = [
+    'toggl', 'add',
+    act['Desc'], '@{}'.format(act['Group']),
+    time_start, time_end]
+  run_cmd(cmd)
 
-# Tests
-#echo "Raw Input:      ${2:-}"
-#echo "Fixed Input:    ${__input_name:-UNKNOWN}"
-#echo "TimeW Name:     ${__timew_name:-UNKNOWN}"
-#echo "Toggl Name:     ${__toggl_name:-UNKNOWN}"
-#echo "Toggl Project:  ${__toggl_project:-UNKNOWN}"
-#echo ""
-#echo "Start Date:     ${__start_date:-UNKNOWN}"
-#echo "End Date:       ${__end_date:-UNKNOWN}"
-#echo ""
+def add_times_from_file(times_file):
+  """Add times to Toggl and TimeWarrior from file."""
+  cur_date = None
 
-# Check run mode
-case "${__mode}" in
-  "add")
-    check_activity
-    if [[ "${__start_date}" == "" ]] || [[ "${__end_date}" == "" ]]; then
-      echo "Please specify a date range for '${__toggl_name}'" 1>&2
-      exit 1
-    fi
-    timew track "${__timew_name}" "${__start_date}" - "${__end_date}"
-    toggl add "${__toggl_name}" @"${__toggl_project}" \
-      "${__start_date}" "${__end_date}"
-    ;;
+  with open(times_file, 'r') as f:
+    for line in f.readlines():
+      line = line.strip()
+      if line[0:1] == '#':
+        new_date = get_date(line)
+        if new_date:
+          cur_date = new_date
+      elif line:
+        r = re.match(r'^(\d{4}) (\d{4}) (\S+)$', line)
+        if r:
+          time_start = get_timestamp(cur_date, r.group(1))
+          time_end = get_timestamp(cur_date, r.group(2), end_time=True)
+          activity = r.group(3)
+          add_activity(time_start, time_end, activity)
+        else:
+          print('Bad line: "{}"'.format(line))
+
+def get_date(line):
+  """Get datetime object from line, returns datetime obj."""
+  new_date = None
+  r = re.match(r'^#(\d{4})?[-/]?(\d{2})[-/](\d{2})$', line)
+  if r:
+    year = r.group(1)
+    if not year:
+      year = time.localtime().tm_year
+    new_date = datetime.datetime(int(year), int(r.group(2)), int(r.group(3)))
+    print('')
+    print('Date: {}'.format(new_date.strftime('%Y-%m-%d')))
+  return new_date
+
+def get_timestamp(_date, _time, end_time=False):
+  """Get timestamp from date and time, returns str."""
+  if not _date:
+    print('ERROR: Date not defined')
+    raise Exception
+  if _time == '0000' and end_time:
+    _date += datetime.timedelta(days=1)
   
-  "now")
-    toggl now
-    timew
-    ;;
-  
-  "start")
-    check_activity
-    timew start "${__timew_name}" "${__start_date}"
-    toggl start "${__toggl_name}" @"${__toggl_project}" "${__start_date}"
-    ;;
-  
-  "stop")
-    timew stop "${__end_date}"
-    toggl stop "${__end_date}"
-    ;;
+  timestamp = '{D}T{H}:{M}'.format(
+    D=_date.strftime('%Y-%m-%d'),
+    H=_time[:2],
+    M=_time[2:])
 
-  *)
-    if [[ "${__mode}" != "" ]]; then
-      echo "ERROR: Unrecognized mode '${__mode}'"
-      echo ""
-    fi
-    echo "Usage: $(basename "${0}") [OPTIONS]"
-    echo ""
-    echo "Options:"
-    echo "    add   NAME DATE DATE"
-    echo "    start NAME [DATE]"
-    echo "    stop       [DATE]"
-    ;;
+  return timestamp
 
-esac
+def run_cmd(cmd):
+  """Run command and show error(s) if they occur."""
+  result = subprocess.run(
+    cmd, check=False,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE)
+  if result.returncode != 0:
+    print(result.stderr.decode())
+
+if __name__ == '__main__':
+  args = list(sys.argv)
+  args.pop(0)
+  if args:
+    add_times_from_file(args.pop(0))
+  else:
+    print('Please provide filename')
+    sys.exit(1)
 
