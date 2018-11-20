@@ -54,6 +54,7 @@ endif
 " 2Shirt Stuff
 set autoindent    " align the new line indent with the previous line
 set expandtab     " insert spaces when hitting TABs
+set nowrap        " I'd rather manually wrap than manually unwrap
 set shiftround    " round indent to multiple of 'shiftwidth'
 set shiftwidth=2  " operation >> indents 2 columns; << unindents 2 columns
 set softtabstop=2 " insert/delete 2 spaces when hitting a TAB/BACKSPACE
