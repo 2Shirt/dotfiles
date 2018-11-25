@@ -1,0 +1,18 @@
+#!/bin/env bash
+#
+## Toggle PuleAudio output port
+
+current_port="$(pactl list sinks | fgrep "Active Port" | cut -d ' ' -f 3-)"
+
+case "${current_port}" in
+  "analog-output-headphones")
+    pactl set-sink-port @DEFAULT_SINK@ analog-output-lineout
+    notify-send --app-name=PulseAudio --urgency=NORMAL "PulseAudio" "Using: Line Out"
+    ;;
+
+  "analog-output-lineout")
+    pactl set-sink-port @DEFAULT_SINK@ analog-output-headphones
+    notify-send --app-name=PulseAudio --urgency=NORMAL "PulseAudio" "Using: Headphones"
+    ;;
+
+esac
