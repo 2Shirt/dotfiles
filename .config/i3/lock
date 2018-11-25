@@ -4,6 +4,9 @@ lockwidth=256
 lockheight=256
 . "$HOME/.cache/wal/colors.sh"
 
+# Disable keyboard led
+xset -led
+
 # Pause dunst
 killall -SIGUSR1 dunst
 
@@ -24,3 +27,5 @@ i3lock -i "$HOME/.config/i3/lock.png" \
 # Resume dunst
 killall -SIGUSR2 dunst
 
+# Enable keyboard led
+xset led named "Scroll Lock"
