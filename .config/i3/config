@@ -70,6 +70,7 @@ bindsym $mod+Shift+d exec dmenu_run
 bindsym $mod+d exec "rofi -show combi"
 
 focus_follows_mouse no
+mouse_warping none
 
 # change focus
 bindsym $mod+j focus left
