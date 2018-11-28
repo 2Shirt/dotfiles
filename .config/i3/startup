@@ -9,7 +9,6 @@ i3-msg "append_layout $HOME/.config/i3/ws1.json"
 #i3-msg "exec dropbox"
 i3-msg "exec nextcloud"
 i3-msg "exec keepass -minimize"
-i3-msg "exec urxvt -title 'Discord' -e discurses"
 i3-msg "exec urxvt -title 'weechat' -e weechat"
 i3-msg "exec urxvt -title 'neomutt' -e neomutt"
 
