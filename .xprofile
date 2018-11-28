@@ -5,3 +5,5 @@ eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 xrdb -merge $HOME/.Xresources
 fcitx &
+xset led named "Scroll Lock" &
+$HOME/.screenlayout/default.sh &
