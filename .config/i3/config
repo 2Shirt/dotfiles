@@ -183,19 +183,17 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # Open specific applications in floating mode
 for_window [class="feh"] border normal 5
-for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="Galculator"] floating enable
+for_window [class="mpv"] fullscreen enable
+for_window [title="Steam - "] floating enable
 for_window [title="Screen Layout Editor"] floating enable
-#for_window [title="Slack"] floating enable border normal 5
-for_window [class="virt-manager"] enable border normal 5
-## TeamViewer
-#for_window [class="TeamViewer"] floating enable border pixel 1
-#for_window [title="Computers & Contacts"] floating enable border normal 5
 ## KeePass
-for_window [title="Open Database File"] floating enable border normal 5
-for_window [title="Select key file"] floating enable border normal 5
-for_window [title="Attach Files To"] floating enable border normal 5
-for_window [title="Save Attached File As"] floating enable border normal 5
-for_window [title="^Font$"] floating enable border normal 5
+for_window [class="KeePass2"] border pixel 1
+for_window [title="Open Database File"] floating enable
+for_window [title="Select key file"] floating enable
+for_window [title="Attach Files To"] floating enable
+for_window [title="Save Attached File As"] floating enable
+for_window [title="^Font$"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
