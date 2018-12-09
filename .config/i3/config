@@ -144,6 +144,11 @@ set $ws8 "八"
 set $ws9 "九"
 set $ws10 "十"
 
+# Set initial workspace for monitors
+workspace $ws1 output HDMI-0
+workspace $ws2 output DP-0 DP-1 DP-2 DP-3 DP-4 DP-5
+workspace $ws3 output DVI-I-0 DVI-I-1
+
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2

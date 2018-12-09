@@ -4,6 +4,7 @@
 feh --bg-fill "$HOME/.wallpaper"
 sleep 1s
 
+i3-msg "workspace 一"
 i3-msg "append_layout $HOME/.config/i3/ws1.json"
 i3-msg "exec telegram-desktop"
 i3-msg "exec nextcloud"
@@ -11,17 +12,13 @@ i3-msg "exec keepass -minimize"
 i3-msg "exec urxvt -title 'weechat' -e weechat"
 i3-msg "exec urxvt -title 'neomutt' -e neomutt"
 
-i3-msg "workspace 二"
-i3-msg "exec urxvt"
-
 i3-msg "workspace 三"
 i3-msg "exec firefox"
+sleep 1s
 
-#i3-msg "workspace 四"
-#i3-msg "exec virt-manager"
+# Virt-Manager (start then hide to tray)
+i3-msg "workspace 二"
+i3-msg "exec virt-manager"
+sleep 3s
+wmctrl -F -c "Virtual Machine Manager"
 
-i3-msg "workspace 一"
-
-# Close Virt-Manager window but leave running in systray
-#sleep 3s
-#wmctrl -F -c "Virtual Machine Manager"
