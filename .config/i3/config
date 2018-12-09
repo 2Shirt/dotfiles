@@ -22,8 +22,8 @@ hide_edge_borders none
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
-bindsym Control+XF86AudioLowerVolume exec --no-startup-id audio-output-toggle
-bindsym Control+XF86AudioRaiseVolume exec --no-startup-id audio-output-toggle
+bindsym Control+XF86AudioLowerVolume exec --no-startup-id /home/twoshirt/.bin/audio-output-toggle
+bindsym Control+XF86AudioRaiseVolume exec --no-startup-id /home/twoshirt/.bin/audio-output-toggle
 
 # alt+tab navi
 #bindsym Mod1+Tab workspace next
