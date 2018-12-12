@@ -1,0 +1,10 @@
+#!/bin/env bash
+# 
+## MPD: Play/Pause and notify
+
+mpc toggle
+notify-send \
+  --app-name=MPD \
+  --urgency=NORMAL \
+  "MPD: Play/Pause" \
+  "$(ncmpcpp --quiet --current-song '{{%b }{[%N]}\n}{%a - }{%t}|{%f}')"

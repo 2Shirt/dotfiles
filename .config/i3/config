@@ -27,6 +27,12 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 bindsym Control+Shift+Escape exec "firefox"
 
+# MPD controls
+bindsym XF86AudioStop exec --no-startup-id mpc stop
+bindsym XF86AudioPlay exec --no-startup-id /home/twoshirt/.bin/mpd-play-pause
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym XF86AudioNext exec --no-startup-id mpc next
+
 # alt+tab navi
 #bindsym Mod1+Tab workspace next
 #bindsym Mod1+Shift+Tab workspace prev
