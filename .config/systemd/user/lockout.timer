@@ -1,0 +1,9 @@
+[Unit]
+Description=After-hours i3 lockout timer
+
+[Timer]
+OnCalendar=*-*-* 02:00:00
+Unit=lockout.service
+
+[Install]
+WantedBy=timers.target

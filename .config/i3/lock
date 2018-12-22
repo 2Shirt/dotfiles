@@ -4,12 +4,19 @@ lockwidth=256
 lockheight=256
 . "$HOME/.cache/wal/colors.sh"
 
+# Pause MPD
+mpc pause
+
 # Disable keyboard led
 xset -led
 
 # Pause dunst
 killall -SIGUSR1 dunst
 
+# Suspend monitors
+xset dpms force suspend
+
+# Lock screen
 i3lock -i "$HOME/.config/i3/lock.png" \
   --nofork \
   --radius=124 --ring-width=7 \
@@ -23,6 +30,14 @@ i3lock -i "$HOME/.config/i3/lock.png" \
   --bshlcolor="${color0:1:6}ff" \
   --ringvercolor="${color0:1:6}ff" \
   --ringwrongcolor="${color2:1:6}ff" \
+
+# After-hours lockout
+lockout_file="/tmp/i3-lockout"
+if [[ -f "${lockout_file}" ]]; then
+  # Relauch self
+  nohup "${0}" &
+  exit 1
+fi
 
 # Resume dunst
 killall -SIGUSR2 dunst

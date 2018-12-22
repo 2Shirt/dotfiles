@@ -1,0 +1,6 @@
+[Unit]
+Description=Bedtime notification service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/notify-send "Go to bed"

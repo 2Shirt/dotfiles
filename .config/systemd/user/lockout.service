@@ -1,0 +1,6 @@
+[Unit]
+Description=After-hours i3 lockout service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/touch /tmp/i3-lockout

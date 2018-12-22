@@ -1,0 +1,6 @@
+[Unit]
+Description=Remove after-hours i3 lockout service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rm /tmp/i3-lockout
