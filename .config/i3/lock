@@ -10,6 +10,9 @@ mpc pause
 # Pause dunst
 killall -SIGUSR1 dunst
 
+# Suspend display
+xset dpms force suspend
+
 i3lock -i "$HOME/.config/i3/lock.png" \
   --nofork \
   --radius=124 --ring-width=7 \
