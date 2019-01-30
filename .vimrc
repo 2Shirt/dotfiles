@@ -62,6 +62,7 @@ set tabstop=2     " an hard TAB displays as 2 columns
 
 " Python Stuff.
 au FileType python set textwidth=79  " lines longer than 79 columns will be broken
+call matchadd('ColorColumn', '\%80v')
 
 " Do wrap stuff
 au FileType mail set wrap
