@@ -9,4 +9,4 @@ image/png; /home/twoshirt/.bin/feh-wrapper %s
 image/gif; /home/twoshirt/.bin/feh-wrapper %s
 
 application/pdf; evince %s
-
+audio/mp3; mpv %s
