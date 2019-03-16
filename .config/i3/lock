@@ -3,9 +3,18 @@
 lockwidth=256
 lockheight=256
 . "$HOME/.cache/wal/colors.sh"
+pause_cmd='{ "command": ["set_property", "pause", true] }'
+
+# Mute audio
+pactl set-sink-mute @DEFAULT_SINK@ 1
 
 # Pause MPD
 mpc pause
+
+# Pause mpv
+for s in /tmp/mpv*socket; do
+  echo "${pause_cmd}" | socat - $s
+done
 
 # Disable keyboard led
 xset -led
@@ -47,3 +56,6 @@ killall -SIGUSR2 dunst
 
 # Enable keyboard led
 xset led named "Scroll Lock"
+
+# Unmute audio
+pactl set-sink-mute @DEFAULT_SINK@ 0

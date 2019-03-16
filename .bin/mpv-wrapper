@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+## mpv wrapper for time tracking
+
+# Log cmd
+echo "[$(date +"%Y-%m-%d %H:%M:%S %z")] Playing from \"$(pwd)\"" >> $HOME/Logs/mpv.log
+for f in "${@}"; do
+  echo "                            \"${f}\"" >> $HOME/Logs/mpv.log
+done
+
+# Start mpv with socket controls
+mpv --input-ipc-server="$(mktemp --suffix=".socket" --tmpdir="/tmp" mpv.XXXXXXXXXX)" "${@}"
