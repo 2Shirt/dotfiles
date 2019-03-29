@@ -24,7 +24,7 @@ calendar.holidays=full
 
 # Next report
 report.next.columns=id,start.age,entry.age,depends,priority,project,tags,scheduled.countdown,due.relative,until.remaining,description,urgency
-report.next.filter=status:pending
+report.next.filter=status:pending project.isnt:勧め
 #report.next.filter=status:pending -SCHEDULED
 report.next.labels=ID,Active,Age,Deps,P,Project,Tag,S,Due,Until,Description,Urg
 report.next.sort=urgency-,project-,status-,due+
