@@ -69,6 +69,11 @@ COLORS = {
 # REGEX
 REGEX_DATE = r'^#(\d{4})?[-/]?(\d{2})[-/](\d{2})$'
 
+def abort(msg='Aborted'):
+  """Print error message and exit"""
+  print(msg, file=sys.stderr)
+  sys.exit(1)
+
 def add_entries(entries):
   """Add entries and show progress."""
   cur_day = entries[0]['Start'].day
@@ -159,12 +164,18 @@ def convert_times(start_date, start_time, end_time):
   if end_time == '0000':
     end_date = start_date + datetime.timedelta(days=1)
 
-  start_datetime = datetime.datetime.strptime(
-    '{}{}'.format(start_date.strftime('%Y%m%d'), start_time),
-    fmt)
-  end_datetime = datetime.datetime.strptime(
-    '{}{}'.format(end_date.strftime('%Y%m%d'), end_time),
-    fmt)
+  try:
+    start_datetime = datetime.datetime.strptime(
+      '{}{}'.format(start_date.strftime('%Y%m%d'), start_time),
+      fmt)
+    end_datetime = datetime.datetime.strptime(
+      '{}{}'.format(end_date.strftime('%Y%m%d'), end_time),
+      fmt)
+  except ValueError:
+    abort('Invalid time entry {}: {} - {}'.format(
+      start_date.strftime('%Y-%m-%d'),
+      start_time,
+      end_time))
 
   return (start_datetime, end_datetime)
 
@@ -308,9 +319,7 @@ if __name__ == '__main__':
     if ask('Add above entries to time trackers?'):
       add_entries(entries)
     else:
-      print('Aborted', file=sys.stderr)
-      sys.exit(1)
+      abort()
   else:
-    print('Please provide filename')
-    sys.exit(1)
+    abort('Please provide filename')
 
