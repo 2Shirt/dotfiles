@@ -24,6 +24,7 @@ ACTIVITIES = {
   '料理':       {'Desc': '料理',        'Group': '元気',    'TimeW': 'Genki'},
   '歩く':       {'Desc': '歩く',        'Group': '元気',    'TimeW': 'Genki'},
   '準備':       {'Desc': '準備',        'Group': '元気',    'TimeW': 'Genki'},
+  '運動':       {'Desc': '運動',        'Group': '元気',    'TimeW': 'Genki'},
   'クンダ':     {'Desc': 'クンダ',      'Group': '働く',    'TimeW': 'Hataraku'},
   'ザック':     {'Desc': 'ザック',      'Group': '働く',    'TimeW': 'Hataraku'},
   'ブランドン': {'Desc': 'ブランドン',  'Group': '働く',    'TimeW': 'Hataraku'},
