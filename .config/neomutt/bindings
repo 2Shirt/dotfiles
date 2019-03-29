@@ -25,3 +25,8 @@ bind compose P postpone-message
 bind index p recall-message
 bind attach <return> view-mailcap
 bind editor <tab> complete-query
+
+#Misc
+macro index A \
+  "<tag-pattern>~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
+  "mark all new as read"
