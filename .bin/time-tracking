@@ -324,6 +324,54 @@ def run_cmd(cmd):
   if result.returncode != 0:
     print(result.stderr.decode())
 
+def entry_crosses_hour(entry, split_hour):
+  """Check if entry crosses specified hour, returns bool."""
+  it_does = False
+
+  if entry['Start'].hour < split_hour:
+    if entry['End'].strftime('%H%M') == '0000':
+      it_does = True
+    elif entry['End'].hour == split_hour and entry['End'].minute != 0:
+      it_does = True
+    elif entry['End'].hour > split_hour:
+      it_does = True
+
+  return it_does
+
+def split_entry(entry, split_hour=23):
+  """Split entry on hour, returns list of entries."""
+  entries = []
+  if entry_crosses_hour(entry, split_hour):
+    # To hour
+    entries.append({
+      'Start': entry['Start'],
+      'End': datetime.datetime(
+        entry['Start'].year,
+        entry['Start'].month,
+        entry['Start'].day,
+        split_hour,
+        0,
+        ),
+      'Name': entry['Name'],
+      })
+    # From hour
+    entries.append({
+      'Start': datetime.datetime(
+        entry['Start'].year,
+        entry['Start'].month,
+        entry['Start'].day,
+        split_hour,
+        0,
+        ),
+      'End': entry['End'],
+      'Name': entry['Name'],
+      })
+  else:
+    # Just return the original entry
+    entries.append(entry)
+
+  return entries
+
 if __name__ == '__main__':
   args = list(sys.argv)
   args.pop(0)
