@@ -249,6 +249,20 @@ def cleanup_times(filepath):
   # Done
   return entries
 
+def entry_crosses_hour(entry, split_hour):
+  """Check if entry crosses specified hour, returns bool."""
+  it_does = False
+
+  if entry['Start'].hour < split_hour:
+    if entry['End'].strftime('%H%M') == '0000':
+      it_does = True
+    elif entry['End'].hour == split_hour and entry['End'].minute != 0:
+      it_does = True
+    elif entry['End'].hour > split_hour:
+      it_does = True
+
+  return it_does
+
 def get_current_timezone():
   """Get current local timezone via date, returns str."""
   cmd = ['date', '+%Z']
@@ -324,19 +338,7 @@ def run_cmd(cmd):
   if result.returncode != 0:
     print(result.stderr.decode())
 
-def entry_crosses_hour(entry, split_hour):
-  """Check if entry crosses specified hour, returns bool."""
-  it_does = False
 
-  if entry['Start'].hour < split_hour:
-    if entry['End'].strftime('%H%M') == '0000':
-      it_does = True
-    elif entry['End'].hour == split_hour and entry['End'].minute != 0:
-      it_does = True
-    elif entry['End'].hour > split_hour:
-      it_does = True
-
-  return it_does
 
 def split_entry(entry, split_hour=23):
   """Split entry on hour, returns list of entries."""
