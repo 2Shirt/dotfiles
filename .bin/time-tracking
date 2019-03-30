@@ -337,7 +337,7 @@ def run_cmd(cmd):
   if result.returncode != 0:
     print(result.stderr.decode())
 
-def split_times(entries, split_hour=23):
+def split_times(entries, split_hour=0):
   """Build new list of times splitting at the split_hour, returns list."""
   new_entries = []
   for e in entries:
@@ -345,7 +345,7 @@ def split_times(entries, split_hour=23):
 
   return new_entries
 
-def split_entry(entry, split_hour=23):
+def split_entry(entry, split_hour=0):
   """Split entry on hour, returns list of entries."""
   entries = []
   if entry_crosses_hour(entry, split_hour):
@@ -386,6 +386,9 @@ if __name__ == '__main__':
     entries = cleanup_times(args.pop(0))
     check_times(entries)
 
+    # Split on 01:00 if in MDT/MST
+    if get_current_timezone() in ('MDT', 'MST'):
+      entries = split_times(entries, split_hour=1)
     # Split on 23:00 if in PDT/PST
     if get_current_timezone() in ('PDT', 'PST'):
       entries = split_times(entries, split_hour=23)
