@@ -65,7 +65,6 @@ COLORS = {
   'BLUE':   '\033[34m',
   'CYAN':   '\033[36m',
   }
-CURRENT_TIMEZONE = 'Unknown'
 
 # REGEX
 REGEX_DATE = r'^#(\d{4})?[-/]?(\d{2})[-/](\d{2})$'
@@ -338,7 +337,13 @@ def run_cmd(cmd):
   if result.returncode != 0:
     print(result.stderr.decode())
 
+def split_times(entries, split_hour=23):
+  """Build new list of times splitting at the split_hour, returns list."""
+  new_entries = []
+  for e in entries:
+    new_entries.extend(split_entry(e, split_hour))
 
+  return new_entries
 
 def split_entry(entry, split_hour=23):
   """Split entry on hour, returns list of entries."""
@@ -380,6 +385,11 @@ if __name__ == '__main__':
   if args:
     entries = cleanup_times(args.pop(0))
     check_times(entries)
+
+    # Split on 23:00 if in PDT/PST
+    if get_current_timezone() in ('PDT', 'PST'):
+      entries = split_times(entries, split_hour=23)
+
     print_times(entries)
     if ask('Add above entries to time trackers?'):
       add_entries(entries)
