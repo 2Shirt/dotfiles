@@ -65,10 +65,12 @@ COLORS = {
   'BLUE':   '\033[34m',
   'CYAN':   '\033[36m',
   }
+CURRENT_TIMEZONE = 'Unknown'
 
 # REGEX
 REGEX_DATE = r'^#(\d{4})?[-/]?(\d{2})[-/](\d{2})$'
 
+# Functions
 def abort(msg='Aborted'):
   """Print error message and exit"""
   print(msg, file=sys.stderr)
@@ -246,6 +248,19 @@ def cleanup_times(filepath):
 
   # Done
   return entries
+
+def get_current_timezone():
+  """Get current local timezone via date, returns str."""
+  cmd = ['date', '+%Z']
+  result = subprocess.run(
+    cmd,
+    check=False,
+    encoding='utf-8',
+    errors='ignore',
+    stderr=subprocess.PIPE,
+    stdout=subprocess.PIPE,
+    )
+  return result.stdout.strip()
 
 def get_date(line):
   """Get datetime object from line, returns datetime obj."""
