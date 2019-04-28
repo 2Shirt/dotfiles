@@ -80,7 +80,10 @@ def add_entries(entries):
   cur_day = entries[0]['Start'].day
 
   # Always print date for first entry
-  print(entries[0]['Start'].strftime('%Y-%m-%d'))
+  print('{BLUE}{d}{CLEAR}'.format(
+    d=entries[0]['Start'].strftime('%Y-%m-%d'),
+    **COLORS,
+    ))
 
   for e in entries:
     if cur_day != e['Start'].day:
