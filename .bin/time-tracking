@@ -88,7 +88,11 @@ def add_entries(entries):
   for e in entries:
     if cur_day != e['Start'].day:
       # Print new date
-      print('\n' + e['Start'].strftime('%Y-%m-%d'))
+      print('')
+      print('{BLUE}{d}{CLEAR}'.format(
+        d=e['Start'].strftime('%Y-%m-%d'),
+        **COLORS,
+        ))
       cur_day = e['Start'].day
 
     # Add entry
