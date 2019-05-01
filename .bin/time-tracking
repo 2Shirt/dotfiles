@@ -397,7 +397,9 @@ if __name__ == '__main__':
       entries = split_times(entries, split_hour=23)
 
     print_times(entries)
-    if ask('Add above entries to time trackers?'):
+    if '--check' in args:
+      sys.exit(0)
+    elif ask('Add above entries to time trackers?'):
       add_entries(entries)
     else:
       abort()
