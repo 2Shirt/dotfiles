@@ -1,7 +1,7 @@
 set spoolfile = "$HOME/Mail/work/inbox"
 set postponed = "$HOME/Mail/work/misc/drafts"
 set record = ""
-set from = "mlk@1201.com"
+set from = "support@1201it.com"
 set realname = "Alan - 1201"
 set signature = "$XDG_CONFIG_HOME/neomutt/sig_work"
 set smtp_url = "smtps://2Shirt1201@smtp.gmail.com"
