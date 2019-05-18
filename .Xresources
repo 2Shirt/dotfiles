@@ -13,7 +13,7 @@ URxvt.scrollBar:	False
 URxvt.scrollBar_right:	False
 URxvt.scrollstyle:	plain
 
-URxvt.shading:	05
+URxvt.shading:	12
 URxvt.transparent:	true
 
 ! Enable copy/past with Ctrl-Shift-C/V
